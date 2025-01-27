@@ -10,8 +10,9 @@ title: "Mentions légales"
 - **Raison sociale** :CETATEC
 - **Forme juridique** : SAS, société par actions simplifiée
 - **Siège social** : 6 RUE HENRI TARIEL 92130 ISSY-LES-MOULINEAUX
-- **Capital social** : 4000
+- **Capital social** : 4 000 €
 - **Numéro d'immatriculation** : 93974436300010
+- **Numéro de TVA intracommunautaire** : FR75939744363
 
 **Directeur de la publication :**
 
