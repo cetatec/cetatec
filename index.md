@@ -5,16 +5,16 @@ title: "Bienvenue chez CETATEC"
 
 CETATEC est une société de conseil dédiée à accompagner les entreprises dans l’exploitation de l’intelligence artificielle et de la data.
 
-Nous nous adressons particulièrement aux PME et ETI cherchant à bénéficier des avancées en IA, souvent limitées par des ressources internes insuffisantes pour relever ces défis.
+Nous nous adressons particulièrement aux PME et ETI qui souhaitent profiter des opportunités offertes par l’IA et qui recherchent des ressources supplémentaires ou une expertise complémentaire pour la mettre en œuvre efficacement.
 
-🔍 Notre approche modulable couvre toutes les étapes, de l’identification des opportunités à la mise en œuvre de solutions concrètes, adaptées aux besoins spécifiques de chaque fonction de l’entreprise.
+Notre approche flexible couvre toutes les étapes, de l’identification des opportunités à la réalisation de solutions concrètes, adaptées aux besoins spécifiques de chaque métier.
 
-Nos solutions reposent sur des technologies avancées : modèles IA comme les LLM (Large Language Models), solutions open source et machine learning sur mesure, intégrés aux systèmes d’information de nos clients.
+Nous utilisons des technologies avancées (modèles IA comme les LLM, solutions open source et machine learning sur mesure), tout en concevant des environnements faciles à prendre en main pour favoriser une adoption efficace.  
 
-Nous répondons également aux enjeux critiques comme la gouvernance des données, la maîtrise des coûts d’exploitation, la gestion de projet et les risques de vendor lock-in.
+Nous prenons également en compte des enjeux cruciaux tels que la gouvernance des données, la maîtrise des coûts d’exploitation, la gestion de projet et le risque de vendor lock-in.
 
-📈 **Notre mission** : Transformer vos projets IA en succès concrets grâce à notre expertise.
+Notre mission : transformer vos projets IA en succès tangibles grâce à notre expertise.
 
-Envie d’en savoir plus ou d’échanger sur vos projets ? [Contactez-nous](mailto:contact@cetatec.fr) pour découvrir comment CETATEC peut faire la différence.
+<a name="contact">Envie d’en savoir plus ou d’échanger sur vos projets ? [Contactez-nous](mailto:contact@cetatec.fr) </a>
 
 [Mentions légales](mentions-legales.md)
