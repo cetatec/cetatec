@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CETATEC — Conseil Data & IA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cormorant:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ── VARIABLES ───────────────────────────────────────────── */
+    :root {
+      --brume:    #F0EFF2;
+      --cendre:   #E2E0E6;
+      --etain:    #C0BDC5;
+      --pierre:   #96939C;
+      --ardoise:  #6A6672;
+      --graphite: #494550;
+      --encre:    #34313A;
+
+```
+  --lavis:    #EFCFCA;
+  --petale:   #DBABA3;
+  --bois:     #C4847A;
+  --vieux:    #AB5F52;
+  --brique:   #944038;
+  --rouge:    #7E2E27;
+
+  --outremer: #3B5571;
+  --sarcelle: #2E6B6B;
+  --foret:    #4D6958;
+  --or:       #8B7B3C;
+
+  --bg: var(--brume);
+  --text: var(--encre);
+  --muted: var(--ardoise);
+  --accent: var(--brique);
+  --accent-light: var(--lavis);
+  --rule: var(--etain);
+
+  --ff-display: 'Cormorant Garamond', Georgia, serif;
+  --ff-body: 'Cormorant Garamond', Georgia, serif;
+
+  --max: 860px;
+  --pad: clamp(1.5rem, 5vw, 4rem);
+}
+
+/* ── RESET ───────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--ff-body);
+  font-weight: 300;
+  font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+
+/* ── LAYOUT HELPERS ──────────────────────────────────────── */
+.container {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--pad);
+}
+.section {
+  padding: clamp(4rem, 8vw, 7rem) 0;
+  border-top: 1px solid var(--rule);
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.section.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── NAV ─────────────────────────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 1.1rem var(--pad);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--brume);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s, background 0.3s;
+}
+nav.scrolled {
+  border-color: var(--rule);
+  background: rgba(240, 239, 242, 0.94);
+  backdrop-filter: blur(8px);
+}
+.nav-logo {
+  font-family: var(--ff-display);
+  font-size: 1.35rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  color: var(--encre);
+  text-transform: uppercase;
+}
+.nav-links {
+  display: flex;
+  gap: 2.2rem;
+  align-items: center;
+}
+.nav-links a {
+  font-size: 0.92rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-family: var(--ff-body);
+  color: var(--ardoise);
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--brique); }
+.nav-links .nav-cta {
+  padding: 0.45rem 1.1rem;
+  border: 1px solid var(--brique);
+  color: var(--brique);
+  border-radius: 2px;
+  font-size: 0.88rem;
+  letter-spacing: 0.14em;
+  transition: background 0.2s, color 0.2s;
+}
+.nav-links .nav-cta:hover {
+  background: var(--brique);
+  color: var(--brume);
+}
+/* Mobile nav */
+.nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+.nav-toggle span {
+  display: block; width: 22px; height: 1.5px;
+  background: var(--encre); margin: 5px 0;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+/* ── HERO ────────────────────────────────────────────────── */
+#accueil {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding-top: 6rem;
+  border-top: none;
+  opacity: 1;
+  transform: none;
+}
+.hero-inner {
+  width: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--pad);
+}
+.hero-eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--brique);
+  margin-bottom: 1.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.2s forwards;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 2rem;
+  height: 1px;
+  background: var(--brique);
+}
+.hero-headline {
+  font-family: var(--ff-display);
+  font-size: clamp(2.6rem, 6vw, 4.4rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--encre);
+  max-width: 680px;
+  opacity: 0;
+  animation: fadeUp 0.9s 0.4s forwards;
+}
+.hero-headline em {
+  font-style: italic;
+  color: var(--brique);
+}
+.hero-sub {
+  margin-top: 1.8rem;
+  max-width: 460px;
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--ardoise);
+  line-height: 1.7;
+  opacity: 0;
+  animation: fadeUp 0.9s 0.6s forwards;
+}
+.hero-cta-row {
+  margin-top: 3rem;
+  display: flex;
+  gap: 1.2rem;
+  align-items: center;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 0.9s 0.8s forwards;
+}
+.btn-primary {
+  padding: 0.75rem 2rem;
+  background: var(--brique);
+  color: var(--brume);
+  font-family: var(--ff-body);
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-primary:hover { background: var(--rouge); transform: translateY(-1px); }
+.btn-ghost {
+  font-size: 1rem;
+  font-weight: 400;
+  font-family: var(--ff-body);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ardoise);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: color 0.2s;
+}
+.btn-ghost:hover { color: var(--encre); }
+.btn-ghost::after { content: '→'; }
+.hero-scroll-hint {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0;
+  animation: fadeIn 1s 1.4s forwards;
+}
+.scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--brique), transparent);
+  animation: scrollPulse 2s 1.6s infinite;
+}
+#accueil { position: relative; }
+
+/* ── SECTION HEADINGS ────────────────────────────────────── */
+.section-label {
+  font-size: 0.82rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-family: var(--ff-body);
+  color: var(--brique);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.section-label::before {
+  content: '';
+  display: block;
+  width: 1.5rem;
+  height: 1px;
+  background: var(--brique);
+}
+h2 {
+  font-family: var(--ff-display);
+  font-size: clamp(1.9rem, 4vw, 2.9rem);
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+  color: var(--encre);
+}
+h2 em {
+  font-style: italic;
+  color: var(--brique);
+}
+.section-intro {
+  font-size: 0.95rem;
+  color: var(--ardoise);
+  max-width: 560px;
+  margin-bottom: 2.5rem;
+  line-height: 1.7;
+}
+
+/* ── POSITIONNEMENT ──────────────────────────────────────── */
+.pos-text {
+  font-family: var(--ff-display);
+  font-size: clamp(1.3rem, 2.5vw, 1.65rem);
+  font-weight: 300;
+  line-height: 1.55;
+  color: var(--graphite);
+  max-width: 680px;
+  border-left: 2px solid var(--lavis);
+  padding-left: 1.5rem;
+  margin-top: 1rem;
+}
+
+/* ── CONSEIL ─────────────────────────────────────────────── */
+.conseil-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 3rem;
+  margin-top: 1rem;
+}
+.conseil-list {
+  margin: 0.5rem 0 1.5rem 0;
+}
+.conseil-list li {
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--cendre);
+  color: var(--graphite);
+  font-size: 0.95rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+}
+.conseil-list li::before {
+  content: '—';
+  color: var(--bois);
+  flex-shrink: 0;
+  line-height: 1.75;
+}
+.conseil-callout {
+  margin-top: 1.5rem;
+  padding: 1.2rem 1.5rem;
+  background: var(--lavis);
+  border-left: 3px solid var(--brique);
+  border-radius: 0 2px 2px 0;
+}
+.conseil-callout p {
+  font-size: 0.9rem;
+  color: var(--graphite);
+  line-height: 1.6;
+}
+.callout-tag {
+  display: inline-block;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--rouge);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  font-family: var(--ff-body);
+}
+.conseil-goal {
+  grid-column: 1 / -1;
+  margin-top: 0.5rem;
+  font-style: italic;
+  font-family: var(--ff-display);
+  font-size: 1.15rem;
+  color: var(--ardoise);
+}
+
+/* ── TRAVAUX ─────────────────────────────────────────────── */
+.travaux-intro {
+  font-size: 0.95rem;
+  color: var(--ardoise);
+  max-width: 600px;
+  margin-bottom: 2.5rem;
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.card {
+  padding: 1.8rem;
+  background: white;
+  border: 1px solid var(--cendre);
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--brique);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s;
+}
+.card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(52,49,58,0.07); }
+.card:hover::after { transform: scaleX(1); }
+.card-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+  font-size: 0.9rem;
+}
+.card-icon.red   { background: var(--lavis); color: var(--rouge); }
+.card-icon.blue  { background: rgba(59,85,113,0.1); color: var(--outremer); }
+.card h3 {
+  font-family: var(--ff-display);
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 0.6rem;
+  line-height: 1.2;
+}
+.card p {
+  font-size: 0.88rem;
+  color: var(--ardoise);
+  line-height: 1.65;
+}
+.travaux-footer {
+  font-size: 0.88rem;
+  color: var(--ardoise);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.travaux-footer::before {
+  content: '';
+  display: block;
+  width: 1rem;
+  height: 1px;
+  background: var(--foret);
+}
+.travaux-footer span { color: var(--foret); font-weight: 500; }
+
+/* ── APPROCHE ────────────────────────────────────────────── */
+#approche { background: var(--encre); border-top: none; }
+#approche .section-label { color: var(--petale); }
+#approche .section-label::before { background: var(--petale); }
+#approche h2 { color: var(--brume); }
+#approche h2 em { color: var(--bois); }
+.approche-inner {
+  display: flex;
+  gap: 5rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.approche-principles {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.5rem;
+}
+.principle {
+  padding: 0.6rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  color: var(--etain);
+  font-size: 1.1rem;
+  font-weight: 300;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.4s, transform 0.4s;
+}
+#approche.visible .principle:nth-child(1) { transition-delay: 0.05s; opacity: 1; transform: none; }
+#approche.visible .principle:nth-child(2) { transition-delay: 0.12s; opacity: 1; transform: none; }
+#approche.visible .principle:nth-child(3) { transition-delay: 0.19s; opacity: 1; transform: none; }
+#approche.visible .principle:nth-child(4) { transition-delay: 0.26s; opacity: 1; transform: none; }
+.approche-statement {
+  font-family: var(--ff-display);
+  font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--cendre);
+  line-height: 1.6;
+  margin-top: 0.5rem;
+  max-width: 280px;
+}
+.approche-highlight {
+  color: var(--petale);
+  font-style: normal;
+}
+
+/* ── CONTACT ─────────────────────────────────────────────── */
+#contact {
+  text-align: center;
+}
+#contact h2 {
+  max-width: 480px;
+  margin: 0 auto 1rem;
+}
+#contact .section-intro {
+  margin: 0 auto 2.5rem;
+  text-align: center;
+}
+.contact-action {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.contact-email-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 2.2rem;
+  background: var(--brique);
+  color: var(--brume);
+  font-family: var(--ff-body);
+  font-size: 1rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.contact-email-btn:hover { background: var(--rouge); transform: translateY(-1px); }
+.contact-email-btn svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+.contact-bpi {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--cendre);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  font-size: 0.82rem;
+  color: var(--pierre);
+}
+.bpi-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--foret);
+  flex-shrink: 0;
+}
+
+/* ── FOOTER ──────────────────────────────────────────────── */
+footer {
+  padding: 2rem var(--pad);
+  border-top: 1px solid var(--rule);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--pierre);
+  max-width: calc(var(--max) + 2 * var(--pad));
+  margin: 0 auto;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.footer-logo {
+  font-family: var(--ff-display);
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--graphite);
+}
+
+/* ── ANIMATIONS ──────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 0.5; }
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.5; transform: scaleY(1); }
+  50%       { opacity: 1;   transform: scaleY(1.15); }
+}
+
+/* ── RESPONSIVE ──────────────────────────────────────────── */
+@media (max-width: 680px) {
+  .conseil-grid { grid-template-columns: 1fr; gap: 0; }
+  .conseil-goal { grid-column: 1; }
+  .approche-inner { flex-direction: column; gap: 1.5rem; }
+  .approche-statement { max-width: 100%; }
+  .nav-links { display: none; flex-direction: column; position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0; background: var(--brume);
+    justify-content: center; align-items: center; gap: 2rem;
+    padding: 2rem; }
+  .nav-links.open { display: flex; }
+  .nav-links a { font-size: 1rem; }
+  .nav-toggle { display: block; position: relative; z-index: 200; }
+}
+```
+
+  </style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ──────────────────────────────────────── -->
+
+<nav id="nav">
+  <a href="#accueil" class="nav-logo">CETATEC</a>
+  <button class="nav-toggle" id="toggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#conseil">Conseil</a></li>
+    <li><a href="#travaux">Travaux</a></li>
+    <li><a href="#approche">Approche</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ────────────────────────────────────────────── -->
+
+<section id="accueil">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Conseil Data & IA</p>
+    <h1 class="hero-headline">
+      Nous aidons les entreprises<br>
+      à utiliser la data et l'IA sur<br>
+      <em>des sujets concrets.</em>
+    </h1>
+    <p class="hero-sub">
+      Comprendre rapidement ce qui est utile,<br>
+      puis avancer de façon structurée.
+    </p>
+    <div class="hero-cta-row">
+      <a href="#contact" class="btn-primary">Prendre contact</a>
+      <a href="#conseil" class="btn-ghost">Notre approche</a>
+    </div>
+  </div>
+  <div class="hero-scroll-hint" aria-hidden="true">
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ── POSITIONNEMENT ──────────────────────────────────── -->
+
+<section id="positionnement" class="section">
+  <div class="container">
+    <p class="section-label">Positionnement</p>
+    <h2>Opérationnel &amp; <em>business</em></h2>
+    <p class="pos-text">
+      Interventions sur des problématiques opérationnelles et business, avec une capacité à mobiliser et mettre en œuvre des solutions data et IA.
+    </p>
+  </div>
+</section>
+
+<!-- ── CONSEIL ─────────────────────────────────────────── -->
+
+<section id="conseil" class="section">
+  <div class="container">
+    <p class="section-label">Conseil</p>
+    <h2>Accompagnement <em>data / IA</em></h2>
+    <div class="conseil-grid">
+      <div>
+        <ul class="conseil-list">
+          <li>Clarification des enjeux et des besoins</li>
+          <li>Identification des cas utiles</li>
+          <li>Structuration et priorisation</li>
+          <li>Accompagnement des premières mises en œuvre</li>
+        </ul>
+        <p class="conseil-goal">Clarifier rapidement les sujets et les traduire en actions concrètes.</p>
+      </div>
+      <div>
+        <div class="conseil-callout">
+          <span class="callout-tag">Référencement Bpifrance</span>
+          <p>Expert référencé dans le cadre du programme <a href="https://diag.bpifrance.fr/diag-data-ia" target="_blank" rel="noopener noreferrer" style="color:var(--rouge);text-decoration:underline;text-underline-offset:2px;"><strong>Diag Data & IA</strong></a> — accompagnement de PME.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TRAVAUX EN COURS ─────────────────────────────────── -->
+
+<section id="travaux" class="section">
+  <div class="container">
+    <p class="section-label">Travaux en cours</p>
+    <h2>Solutions en <em>développement</em></h2>
+    <p class="travaux-intro">
+      En parallèle des missions de conseil, développement actif de plusieurs solutions, en collaboration avec des partenaires. Prototypes en cours, testés sur des cas réels — ces travaux alimentent directement les missions avec une vision concrète de ce qui est faisable aujourd'hui.
+    </p>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon red">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h3>Finance Corporate / IA</h3>
+        <p>Travaux autour de l'usage de l'IA sur des problématiques de pilotage financier.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon blue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+        </div>
+        <h3>Data & IA avancées</h3>
+        <p>Développement de solutions basées sur des approches avancées (ML, causalité), appliquées à des cas opérationnels.</p>
+      </div>
+    </div>
+    <p class="travaux-footer"><span>Ouverts à des collaborations ciblées.</span></p>
+  </div>
+</section>
+
+<!-- ── APPROCHE ─────────────────────────────────────────── -->
+
+<section id="approche" class="section">
+  <div class="container">
+    <p class="section-label">Approche</p>
+    <h2>Comment<br><em>nous travaillons</em></h2>
+    <div class="approche-inner">
+      <div class="approche-principles">
+        <div class="principle">Partir de l'existant</div>
+        <div class="principle">Aller à l'essentiel</div>
+        <div class="principle">Éviter les effets de mode</div>
+        <div class="principle">Produire des résultats utilisables</div>
+      </div>
+      <p class="approche-statement">Travail direct avec les <span class="approche-highlight">équipes métiers</span> — sans intermédiaire.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ──────────────────────────────────────────── -->
+
+<section id="contact" class="section">
+  <div class="container">
+    <p class="section-label" style="justify-content:center">Contact</p>
+    <h2>Échanger sur une<br><em>problématique concrète</em></h2>
+    <p class="section-intro">Disponible pour discuter de vos enjeux data et IA.</p>
+    <div class="contact-action">
+      <a class="contact-email-btn" href="https://www.linkedin.com/in/lebedevdmi" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        Contacter sur LinkedIn
+      </a>
+    </div>
+    <div class="contact-bpi">
+      <span class="bpi-dot"></span>
+      Expert référencé Bpifrance — <a href="https://diag.bpifrance.fr/diag-data-ia" target="_blank" rel="noopener noreferrer" style="color:var(--foret);text-decoration:underline;text-underline-offset:2px;">Diag Data & IA</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ───────────────────────────────────────────── -->
+
+<footer>
+  <span class="footer-logo">CETATEC</span>
+  <span>© 2025 — CETATEC</span>
+  <span>Paris, France</span>
+</footer>
+
+<!-- ── SCRIPTS ──────────────────────────────────────────── -->
+
+<script>
+  // Nav scroll state
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  // Mobile menu
+  const toggle = document.getElementById('toggle');
+  const links  = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => {
+    links.classList.toggle('open');
+  });
+  links.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => links.classList.remove('open'));
+  });
+
+  // Scroll-reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.section').forEach(s => observer.observe(s));
+</script>
+
+
+
+<a href="/legal" style="color:var(--pierre);text-decoration:underline;text-underline-offset:2px;font-size:0.75rem;">Mentions légales</a>
+
+</body>
+</html>
